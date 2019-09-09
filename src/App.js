@@ -47,15 +47,17 @@ class App extends Component {
 
   render() {
     return (
-      console.log(this.features);
+      console.log(this.props.features),
+      console.log('this.state from app: ' + this.state.selected),
       <div>
         <Input 
-        features={this.features} 
+        features={this.props.features}
         currentState={this.state}
+        update={this.updateFeature}
         />
         <Cart 
         currentState={this.state}
-        features={this.features}
+        features={this.props.features}
         />
       </div>
       
@@ -136,7 +138,7 @@ class App extends Component {
     //     </main>
     //   </div>
     // );
-  }
+    }
 }
 
 export default App;

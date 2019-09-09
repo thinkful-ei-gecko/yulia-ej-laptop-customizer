@@ -1,13 +1,14 @@
 import React from 'react'
 
 export default function Cart(props) {
+    console.log('props from cart: ' + props)
     const USCurrencyFormat = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD'
       });
-    const summary = Object.keys(this.props.currentState.selected).map((feature, idx) => {
+    const summary = Object.keys(props.currentState.selected).map((feature, idx) => {
         const featureHash = feature + '-' + idx;
-        const selectedOption = this.props.currentState.selected[feature];
+        const selectedOption = props.currentState.selected[feature];
   
         return (
           <div className="summary__option" key={featureHash}>
@@ -20,8 +21,8 @@ export default function Cart(props) {
         );
       });
   
-      const total = Object.keys(this.props.currentState.selected).reduce(
-        (acc, curr) => acc + this.props.currentState.selected[curr].cost,
+      const total = Object.keys(props.currentState.selected).reduce(
+        (acc, curr) => acc + props.currentState.selected[curr].cost,
         0
       );
   
@@ -33,7 +34,7 @@ export default function Cart(props) {
           <main>
             <form className="main__form">
               <h2>Customize your laptop</h2>
-              {this.props.features}
+              {total}
             </form>
             <section className="main__summary">
               <h2>Your cart</h2>
