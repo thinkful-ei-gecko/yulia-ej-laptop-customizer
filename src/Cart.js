@@ -1,11 +1,8 @@
 import React from 'react'
+import Checkout from './Checkout.js'
+import './Cart.css'
 
 export default function Cart(props) {
-    console.log('props from cart: ' + props)
-    const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-      });
     const summary = Object.keys(props.currentState.selected).map((feature, idx) => {
         const featureHash = feature + '-' + idx;
         const selectedOption = props.currentState.selected[feature];
@@ -15,7 +12,7 @@ export default function Cart(props) {
             <div className="summary__option__label">{feature} </div>
             <div className="summary__option__value">{selectedOption.name}</div>
             <div className="summary__option__cost">
-              {USCurrencyFormat.format(selectedOption.cost)}
+              {props.currency.format(selectedOption.cost)}
             </div>
           </div>
         );
@@ -27,26 +24,13 @@ export default function Cart(props) {
       );
   
       return (
-        <div className="App">
-          <header>
-            <h1>ELF Computing | Laptops</h1>
-          </header>
-          <main>
-            <form className="main__form">
-              <h2>Customize your laptop</h2>
-              {total}
-            </form>
-            <section className="main__summary">
-              <h2>Your cart</h2>
-              {summary}
-              <div className="summary__total">
-                <div className="summary__total__label">Total</div>
-                <div className="summary__total__value">
-                  {USCurrencyFormat.format(total)}
-                </div>
-              </div>
-            </section>
-          </main>
-        </div>
+        <Checkout 
+        total={total} 
+        summary={summary} 
+        currency={props.currency} 
+        update={props.update}
+        currentState={props.currentState}
+        features={props.features}
+        />
       );
 }
